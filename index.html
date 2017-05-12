@@ -105,14 +105,14 @@
             <div class="container">
                 <div class="col-lg-8 col-lg-offset-2">
                 <h2>The Eurovision Song Contest</h2>
-                <p>42 candidates, each representing one European country, take part in the Eurovision Song Contest this year. But only 26 will make it to the final on May 13th in Kiev, Ukraine.</p>
-                <p>Getting through to the big final will be decided during two semi-finals before the event, with a professional jury and the public voting.</p>
-                <p>We wondered if searches would reflect each country’s voting patterns. If they did, the map would look like this. It shows the <span class="highlight qualifiers">20 countries that will pass the semi-finals in search</span> and the <span class="highlight losers">16 eliminated participants</span>. <span class="highlight finalists">6 countries</span>, host Ukraine and the 'Big Five', are automatically qualified for the final.</p>
-                <!--div>
-                    <span class="switchlabel-extra">Real competition</span>
-                    <input type="checkbox" id="real-search-switch-one" name="set-name" class="switch-input">
-                    <label for="real-search-switch-one" class="switch-label"><span class="toggle--on">Eurovision voting</span><span class="toggle--off">Eurovision voting</span></label>
-	            </div-->
+                <p>42 candidates, each representing one European country, take part in the Eurovision Song Contest this year. But only 26 made it to the final on May 13th in Kiev, Ukraine.</p>
+                <p>Getting through to the big final was decided during two semi-finals before the event, with a professional jury and the public voting.</p>
+                <p>We wondered if searches would reflect each country’s voting patterns. If they did, the map would look like the one below. It shows the <span class="highlight qualifiers">20 countries that would have past the semi-finals in search</span> and the <span class="highlight losers">16 eliminated participants</span>.<span class="highlight finalists">6 countries</span>, host Ukraine and the 'Big Five', are automatically qualified for the final.</p>
+                <p>Votes based on search activity 'predicted' 15 out of 20 qualified semi-finalists correctly. Use the switch to toggle the colors between the predicted and the real qualified countries.
+	            </p>
+                <p><span class="switch-label-left">Predicted</span><input type="checkbox" id="real-search-switch-one" name="set-name" class="switch-input">
+                    <label for="real-search-switch-one" class="switch-label switch-label-1000"><span class="toggle--on">Reality</span><span class="toggle--off">Reality</span></label> </p>
+                
                 </div>
             </div>
             </div>
@@ -145,7 +145,7 @@
                     
                     <!--p>Switch to the real<input type="checkbox" id="real-search-switch-two" name="set-name" class="switch-input">
                         <label for="real-search-switch-two" class="switch-label"><span class="toggle--on">Eurovision voting</span><span class="toggle--off">Eurovision voting</span></label></p-->
-                    <p class="annotation"><span class="highlight finalists">Automatically qualified countries</span> <span class="highlight qualifiers">semi-final qualifiers</span> and <span class="highlight losers">eliminated countries</span> according to search activity</p>
+                    <p class="annotation"><span class="highlight finalists">Automatically qualified countries</span> <span class="highlight qualifiers">semi-final qualifiers</span> and <span class="highlight losers">eliminated countries</span></p>
                     <p>Small countries like San Marino and Malta are visible on the squarified map. Notice Australia in the bottom right corner. The Contest is very popular in Australia and the country was allowed to participate in 2015 for the 60th anniversary of the festival. It was supposed to be a one-off event, but Australia participated again in 2016 and is competing this year too.</p>
                 </div>
             </div>
@@ -226,7 +226,7 @@
             </div>
             <div class="col-md-3">
                 <h3>Points by search</h3>
-                <p class="annotation">Points earned by searches*</p>
+                <p class="annotation">Points earned by searches</p>
                 <ul class="countrylist" id="country-list">
                 </ul>
             </div>
@@ -240,7 +240,7 @@
         <div class="row">
             <div class="col-md-6"></div>
             <div class="col-md-6">
-            <p class="annotation">*Some countries lacked sufficient search data to award all search points</p>
+            <!--p class="annotation">*Some countries lacked sufficient search data to award all search points</p-->
             </div>
         </div>    
     </section>
@@ -303,7 +303,7 @@
                 </div>
                 <div class="col-md-6">
                     <h3>Methodology</h3>
-                    <p>The search activity data for every candidate was gathered on May 3rd and spans the seven days prior to this date.</p>
+                    <p>The search activity data for every candidate was collected on May 12 (1 day before the final) and spans the seven days prior to this date. The data gathered were searches made for every country's participating act together with the topic Eurovision (for example for Belgium: "Blanche Eurovision"). Whenever possible, we used <a href="https://support.google.com/trends/answer/4359550?hl=en">topics rather than exact search strings</a> to ensure different spellings were included. In San Marino there was too little search activity to award all points.</p>
                     <p>Visuals built with <a href="https://d3js.org/">D3</a>, <a href="https://github.com/sebastian-meier/d3.geo2rect">geo2rect</a>, Bootstrap <a href="https://startbootstrap.com/template-overviews/grayscale/">Grayscale</a> template, <a href="https://github.com/lipis/flag-icon-css">flag-icon-css</a> and circular flags by <a href="http://www.flaticon.com/packs/countrys-flags">Freepik</a>. Opening image by EBU.</p>
                     <p>If you would like to know more, please read the <a href="http://www.maartenlambrechts.com/2017/05/03/the-eurosearch-song-contest-making-of.html">complete making-of</a>.</p>
                 </div>

@@ -100,59 +100,61 @@ var config = {
 
 //Data
 var qualification = [
-    { countrycode: 'ALB', countrycode2: 'al', qualifiedreal: true, name: 'Albania', round: 'first', qualified: true },
+    { countrycode: 'ALB', countrycode2: 'al', qualifiedreal: false, name: 'Albania', round: 'first', qualified: true },
     { countrycode: 'ARM', countrycode2: 'ar', qualifiedreal: true, name: 'Armenia', round: 'first', qualified: true },
     { countrycode: 'AUS', countrycode2: 'au', qualifiedreal: true, name: 'Australia', round: 'first', qualified: true },
     { countrycode: 'AUT', countrycode2: 'at', qualifiedreal: true, name: 'Austria', round: 'second', qualified: true },
     { countrycode: 'AZE', countrycode2: 'az', qualifiedreal: true, name: 'Azerbaijan', round: 'first', qualified: true },
     { countrycode: 'BEL', countrycode2: 'be', qualifiedreal: true, name: 'Belgium', round: 'first', qualified: true },
     { countrycode: 'BGR', countrycode2: 'bg', qualifiedreal: true, name: 'Bulgaria', round: 'second', qualified: true },
-    { countrycode: 'BIH', countrycode2: 'bi', qualifiedreal: true, name: 'Bosnia and Herzegovina', round: 'none', qualified: false },
+    { countrycode: 'BIH', countrycode2: 'bi', qualifiedreal: false, name: 'Bosnia and Herzegovina', round: 'none', qualified: false },
     { countrycode: 'BLR', countrycode2: 'by', qualifiedreal: true, name: 'Belarus', round: 'second', qualified: false },
-    { countrycode: 'CHE', countrycode2: 'ch', qualifiedreal: true, name: 'Switzerland', round: 'second', qualified: true },
+    { countrycode: 'CHE', countrycode2: 'ch', qualifiedreal: false, name: 'Switzerland', round: 'second', qualified: true },
     { countrycode: 'CYP', countrycode2: 'cy', qualifiedreal: true, name: 'Cyprus', round: 'first', qualified: true },
-    { countrycode: 'CZE', countrycode2: 'cz', qualifiedreal: true, name: 'Czech Republic', round: 'first', qualified: false },
+    { countrycode: 'CZE', countrycode2: 'cz', qualifiedreal: false, name: 'Czech Republic', round: 'first', qualified: false },
     { countrycode: 'DEU', countrycode2: 'de', qualifiedreal: true, name: 'Germany', round: 'final', qualified: true },
     { countrycode: 'DNK', countrycode2: 'dk', qualifiedreal: true, name: 'Denmark', round: 'second', qualified: true },
     { countrycode: 'ESP', countrycode2: 'es', qualifiedreal: true, name: 'Spain', round: 'final', qualified: true },
-    { countrycode: 'EST', countrycode2: 'ee', qualifiedreal: true, name: 'Estonia', round: 'second', qualified: false },
-    { countrycode: 'FIN', countrycode2: 'fi', qualifiedreal: true, name: 'Finland', round: 'first', qualified: true },
+    { countrycode: 'EST', countrycode2: 'ee', qualifiedreal: false, name: 'Estonia', round: 'second', qualified: false },
+    { countrycode: 'FIN', countrycode2: 'fi', qualifiedreal: false, name: 'Finland', round: 'first', qualified: true },
     { countrycode: 'FRA', countrycode2: 'fr', qualifiedreal: true, name: 'France', round: 'final', qualified: true },
     { countrycode: 'GBR', countrycode2: 'gb', qualifiedreal: true, name: 'Great Brittain', round: 'final', qualified: true },
-    { countrycode: 'GEO', countrycode2: 'ge', qualifiedreal: true, name: 'Georgia', round: 'first', qualified: false },
+    { countrycode: 'GEO', countrycode2: 'ge', qualifiedreal: false, name: 'Georgia', round: 'first', qualified: false },
     { countrycode: 'GRC', countrycode2: 'gr', qualifiedreal: true, name: 'Greece', round: 'first', qualified: true },
     { countrycode: 'HUN', countrycode2: 'hu', qualifiedreal: true, name: 'Hungary', round: 'second', qualified: true },
     { countrycode: 'HRV', countrycode2: 'hr', qualifiedreal: true, name: 'Croatia', round: 'second', qualified: true },
-    { countrycode: 'IRL', countrycode2: 'ie', qualifiedreal: true, name: 'Ireland', round: 'second', qualified: true },
-    { countrycode: 'ISL', countrycode2: 'is', qualifiedreal: true, name: 'Iceland', round: 'first', qualified: false },
+    { countrycode: 'IRL', countrycode2: 'ie', qualifiedreal: false, name: 'Ireland', round: 'second', qualified: true },
+    { countrycode: 'ISL', countrycode2: 'is', qualifiedreal: false, name: 'Iceland', round: 'first', qualified: false },
     { countrycode: 'ISR', countrycode2: 'il', qualifiedreal: true, name: 'Israel', round: 'second', qualified: true },
     { countrycode: 'ITA', countrycode2: 'it', qualifiedreal: true, name: 'Italia', round: 'final', qualified: true },
-    { countrycode: 'KOS', countrycode2: 'ko', qualifiedreal: true, name: 'Kosovo', round: 'none', qualified: false },
-    { countrycode: 'LTU', countrycode2: 'lt', qualifiedreal: true, name: 'Lithuania', round: 'second', qualified: false },
-    { countrycode: 'LUX', countrycode2: 'lu', qualifiedreal: true, name: 'Luxembourg', round: 'none', qualified: false },
-    { countrycode: 'LVA', countrycode2: 'lv', qualifiedreal: true, name: 'Latvia', round: 'first', qualified: false },
+    { countrycode: 'KOS', countrycode2: 'ko', qualifiedreal: false, name: 'Kosovo', round: 'none', qualified: false },
+    { countrycode: 'LTU', countrycode2: 'lt', qualifiedreal: false, name: 'Lithuania', round: 'second', qualified: false },
+    { countrycode: 'LUX', countrycode2: 'lu', qualifiedreal: false, name: 'Luxembourg', round: 'none', qualified: false },
+    { countrycode: 'LVA', countrycode2: 'lv', qualifiedreal: false, name: 'Latvia', round: 'first', qualified: false },
     { countrycode: 'MDA', countrycode2: 'md', qualifiedreal: true, name: 'Moldova', round: 'first', qualified: false },
-    { countrycode: 'MKD', countrycode2: 'mk', qualifiedreal: true, name: 'Macedonia', round: 'second', qualified: false },
-    { countrycode: 'MLT', countrycode2: 'ml', qualifiedreal: true, name: 'Malta', round: 'second', qualified: false },
-    { countrycode: 'MNE', countrycode2: 'me', qualifiedreal: true, name: 'Montenegro', round: 'first', qualified: false },
+    { countrycode: 'MKD', countrycode2: 'mk', qualifiedreal: false, name: 'Macedonia', round: 'second', qualified: false },
+    { countrycode: 'MLT', countrycode2: 'ml', qualifiedreal: false, name: 'Malta', round: 'second', qualified: false },
+    { countrycode: 'MNE', countrycode2: 'me', qualifiedreal: false, name: 'Montenegro', round: 'first', qualified: false },
     { countrycode: 'NLD', countrycode2: 'nl', qualifiedreal: true, name: 'Netherlands', round: 'second', qualified: true },
     { countrycode: 'NOR', countrycode2: 'no', qualifiedreal: true, name: 'Norway', round: 'second', qualified: false },
     { countrycode: 'POL', countrycode2: 'pl', qualifiedreal: true, name: 'Poland', round: 'first', qualified: false },
     { countrycode: 'PRT', countrycode2: 'pt', qualifiedreal: true, name: 'Portugal', round: 'first', qualified: true },
     { countrycode: 'ROU', countrycode2: 'ro', qualifiedreal: true, name: 'Romania', round: 'second', qualified: false },
-    { countrycode: 'RUS', countrycode2: 'ru', qualifiedreal: true, name: 'Russia', round: 'none', qualified: false },
-    { countrycode: 'SMR', countrycode2: 'sm', qualifiedreal: true, name: 'San Marino', round: 'second', qualified: false },
-    { countrycode: 'SRB', countrycode2: 'rs', qualifiedreal: true, name: 'Serbia', round: 'second', qualified: true },
-    { countrycode: 'SVK', countrycode2: 'sk', qualifiedreal: true, name: 'Slovakia', round: 'none', qualified: false },
-    { countrycode: 'SVN', countrycode2: 'si', qualifiedreal: true, name: 'Slovenia', round: 'first', qualified: false },
+    { countrycode: 'RUS', countrycode2: 'ru', qualifiedreal: false, name: 'Russia', round: 'none', qualified: false },
+    { countrycode: 'SMR', countrycode2: 'sm', qualifiedreal: false, name: 'San Marino', round: 'second', qualified: false },
+    { countrycode: 'SRB', countrycode2: 'rs', qualifiedreal: false, name: 'Serbia', round: 'second', qualified: true },
+    { countrycode: 'SVK', countrycode2: 'sk', qualifiedreal: false, name: 'Slovakia', round: 'none', qualified: false },
+    { countrycode: 'SVN', countrycode2: 'si', qualifiedreal: false, name: 'Slovenia', round: 'first', qualified: false },
     { countrycode: 'SWE', countrycode2: 'se', qualifiedreal: true, name: 'Sweden', round: 'first', qualified: true },
     { countrycode: 'UKR', countrycode2: 'ua', qualifiedreal: true, name: 'Ukraine', round: 'final', qualified: true },
-    { countrycode: 'TUR', countrycode2: 'tr', qualifiedreal: true, name: 'Turkey', round: 'none', qualified: false }
+    { countrycode: 'TUR', countrycode2: 'tr', qualifiedreal: false, name: 'Turkey', round: 'none', qualified: false }
 ];
 
 var finalists = [];
 var losers = [];
+var losersReal = [];
 var qualifiers = [];
+var qualifiersReal = [];
 var nonparticipants = [];
 var participants = [];
 qualification.forEach(function (element) {
@@ -165,11 +167,20 @@ qualification.forEach(function (element) {
     if (!element.qualified && element.round != 'none') {
         losers.push(element.countrycode);
     }
+    if (!element.qualifiedreal && element.round != 'none') {
+        losersReal.push(element.countrycode);
+    }
     if ((element.round == "first" || element.round == "second") && element.qualified) {
         var obj = {};
         obj.countrycode = element.countrycode;
         obj.name = element.name;
         qualifiers.push(obj);
+    }
+    if ((element.round == "first" || element.round == "second") && element.qualifiedreal) {
+        var obj = {};
+        obj.countrycode = element.countrycode;
+        obj.name = element.name;
+        qualifiersReal.push(obj);
     }
     if (element.round == "none") {
         nonparticipants.push(element.countrycode);
@@ -180,7 +191,7 @@ qualification.forEach(function (element) {
 });
 
 //Countries in the final
-var inthefinal = finalists.concat(qualifiers);
+var inthefinal = finalists.concat(qualifiersReal);
 inthefinal = inthefinal.sort(function (a, b) {
     var nameA = a.name;
     var nameB = b.name;
@@ -283,7 +294,7 @@ function gridMap() {
 }
 
 //Load data and start drawing
-d3.csv('data/votes_20170503.csv', function (data) {
+d3.csv('data/votes_20170512.csv', function (data) {
     d3.csv('data/votes_real_mock_20170503.csv', function (realdata) {
         //d3.csv('data/allcanddata.csv', function (canddata) {
             d3.csv('data/countrylookup.csv', function (countrydata) {
@@ -848,7 +859,7 @@ d3.csv('data/votes_20170503.csv', function (data) {
                                 .attr('class', 'map-two-label')
                                 .text(country);
                         }
-                    }, 200);
+                    }, 500);
 
                     gr.config.duration = 3000;
 
@@ -857,14 +868,24 @@ d3.csv('data/votes_20170503.csv', function (data) {
                         d3.selectAll("#map-one svg .id-" + country.countrycode + ", #map-two svg .id-" + country.countrycode)
                             .style("fill", "#dc0000");
                     });
-                    losers.forEach(function (countrycode) {
-                        d3.selectAll("#map-one svg .id-" + countrycode + ", #map-two svg .id-" + countrycode)
+                    //Initial colors for first map
+                    losers.forEach(function (country) {
+                        d3.selectAll("#map-one svg .id-" + country)
                             .style("fill", "#7e7eb4");
-                    });
+                    });                    
                     qualifiers.forEach(function (country) {
                         d3.selectAll("#map-one svg .id-" + country.countrycode + ", #map-two svg .id-" + country.countrycode)
                             .style("fill", "#ff5454");
                     });
+                    //Second map uses real colors
+                    qualifiersReal.forEach(function (country) {
+                            d3.selectAll("#map-two svg .id-" + country.countrycode)
+                                .style("fill", "#ff5454");
+                        });
+                    losersReal.forEach(function (country) {
+                            d3.selectAll("#map-two svg .id-" + country)
+                                .style("fill", "#7e7eb4");
+                            });
 
                     inthefinal.forEach(function (country) {
                         d3.selectAll("#map-three rect.id-" + country.countrycode)
@@ -875,7 +896,37 @@ d3.csv('data/votes_20170503.csv', function (data) {
                             .style("fill", "#777777");
                     });
                 });
+                //
+                $('#real-search-switch-one').change(function () {
+                    var thisswitch = $(this);
+                    thisswitch.prop('disabled', true);
+                    setTimeout(function () {
+                                thisswitch.prop('disabled', false);
+                            }, 1000);
 
+                    if (!this.checked) {
+                        qualifiers.forEach(function (country) {
+                            d3.selectAll("#map-one svg .id-" + country.countrycode).transition().duration(1000)
+                                .style("fill", "#ff5454");
+                        });
+                        losers.forEach(function (countrycode) {
+                            d3.selectAll("#map-one svg .id-" + countrycode).transition().duration(1000)
+                                .style("fill", "#7e7eb4");
+                        });
+                    }
+                    if (this.checked) {
+                        qualifiersReal.forEach(function (country) {
+                            d3.selectAll("#map-one svg .id-" + country.countrycode).transition().duration(1000)
+                                .style("fill", "#ff5454");
+                        });
+                        losersReal.forEach(function (countrycode) {
+                            d3.selectAll("#map-one svg .id-" + countrycode).transition().duration(1000)
+                                .style("fill", "#7e7eb4");
+                        });
+                    }
+                });
+                
+                //Toggle squarify
                 $('#mapswitch').change(function () {
                     gr.toggle();
                     gr.draw();

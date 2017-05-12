@@ -215,7 +215,7 @@ a:focus {
 .switch-input {
   display: none;
 }
-.switch-label {
+.switch-label, .switch-label-left {
   position: relative;
   display: inline-block;
   min-width: 112px;
@@ -228,6 +228,11 @@ a:focus {
   font-size: 18px;
   color: #DC0046;
 }
+.switch-label-left {
+  padding: 0;
+  margin-right: -16px;
+}
+
 .switchlabel-extra {
   text-align: right;
   padding: 16px 0 16px 44px;
@@ -248,6 +253,13 @@ a:focus {
   -webkit-transition: all 3s ease;
   transition: all 3s ease;
 }
+
+.switch-label-1000:before, .switch-label-1000:after {
+  -webkit-transition: all 1s ease;
+  transition: all 1s ease;
+}
+
+
 .switch-label:before {
   left: 1px;
   width: 40px;
