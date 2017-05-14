@@ -295,8 +295,8 @@ function gridMap() {
 
 //Load data and start drawing
 d3.csv('data/votes_20170512.csv', function (data) {
-    d3.csv('data/votes_real_mock_20170503.csv', function (realdata) {
-        //d3.csv('data/allcanddata.csv', function (canddata) {
+    d3.csv('data/peoplesvotes_20170514.csv', function (realdata) {
+        d3.csv('data/overallranking.csv', function (overallrank) {
             d3.csv('data/countrylookup.csv', function (countrydata) {
                 //Create lookup objects for country names and country codes
                 var lookup = {};
@@ -349,7 +349,7 @@ d3.csv('data/votes_20170512.csv', function (data) {
                 function getrealpoints(country, fromto) {
                     if (fromto == "from") {
                         var pointsFrom = realdata.filter(function (element) {
-                            return element.from == country;
+                            return element.from == country && element.points != 0;
                         })
                         pointsFrom.sort(function (a, b) {
                             return b.points - a.points;
@@ -358,7 +358,7 @@ d3.csv('data/votes_20170512.csv', function (data) {
                     }
                     if (fromto == "to") {
                         var pointsTo = realdata.filter(function (element) {
-                            return element.to == country;
+                            return element.to == country && element.points != 0;
                         })
                         pointsTo.sort(function (a, b) {
                             return a.points - b.points;
@@ -386,6 +386,15 @@ d3.csv('data/votes_20170512.csv', function (data) {
                 rankingReal = rankingReal.sort(function (a, b) {
                     return b.value - a.value;
                 });
+                
+                var rankingrealLookup = {};
+                rankingReal.forEach(function(country){
+                    rankingrealLookup[country.key] = country.value;
+                });
+                var rankinggoogleLookup = {};
+                ranking.forEach(function(country){
+                    rankinggoogleLookup[country.key] = country.value;
+                });
 
                 //Connecting lines between google and real rankings
                 var rankingconnect = [];
@@ -393,8 +402,9 @@ d3.csv('data/votes_20170512.csv', function (data) {
                     var obj = {};
                     obj.countrycode = rankingelement.key;
                     obj.googlerank = rankingindex + 1;
-                    rankingReal.forEach(function (rankingrealelement, rankingrealindex) {
-                        if (rankingelement.key == rankingrealelement.key) {
+                    //rankingReal.forEach(function (rankingrealelement, rankingrealindex) {
+                    overallrank.forEach(function (rankingrealelement, rankingrealindex) {
+                        if (rankingelement.key == rankingrealelement.Country) {
                             obj.realrank = rankingrealindex + 1;
                         }
                     })
@@ -427,6 +437,8 @@ d3.csv('data/votes_20170512.csv', function (data) {
                     $('.btn.btn-default.dropdown-toggle').val($(selcountrycode).data('value'));
 
                     var pointsToAnimate = getpoints(selcountrycode, "from");
+                    var pointsToAnimateReal = getrealpoints(selcountrycode, "from");
+                    
                     //Add the circles for the voting animation
                     var googlecircles = cellgroup.selectAll("circle")
                         .data(pointsToAnimate)
@@ -438,16 +450,15 @@ d3.csv('data/votes_20170512.csv', function (data) {
                         .style("stroke", "#ffffff")
                         .style("stroke-width", 2);
 
-                    //TO UNCOMMENT WHEN REAL VOTES ARE IN
-                    /*var realcircles = cellgroup.selectAll("circle.real")
-                        .data(getrealpoints(selcountrycode, "from"))
+                    var realcircles = cellgroup.selectAll("circle.real")
+                        .data(pointsToAnimateReal)
                         .enter().append("circle")
                         .attr("cx", (cellsizeHalf * config.grid[selcountrycode].x + cellsizeHalf * 0.5))
                         .attr("cy", (cellsizeHalf * config.grid[selcountrycode].y + cellsizeHalf * 0.5))
-                        .attr("r", function (d) { return d.points; })
+                        .attr("r", function (d) {return d.points; })
                         .style("fill", "none")
                         .style("stroke", "#000000")
-                        .style("stroke-width", 2);*/
+                        .style("stroke-width", 2);
 
                     //Put the text on top, above the new circles
                     d3.selectAll("#map-three text").raise()
@@ -457,9 +468,7 @@ d3.csv('data/votes_20170512.csv', function (data) {
                     //Animate the circles to the awarded countries
                     googlecircles.transition().ease(d3.easeExpInOut)
                         .delay(function (d, i) {
-                            //WITH REAL RESULTS
-                            //return 600 * (9 - i);
-                            return 600 * (pointsToAnimate.length - 1 - i);
+                            return 600 * (10 - i);
                         })
                         .duration(3000)
                         .attr("cx", function (d, i) {
@@ -469,17 +478,13 @@ d3.csv('data/votes_20170512.csv', function (data) {
                             return (cellsizeHalf * config.grid[d.to].y + cellsizeHalf * 0.5)
                         })
                         .on("end", function (d, i) {
-                            //REMOVE THESE 3 LINES WHEN REAL VOTES ARE IN
-                            d3.select("#country-list-real")
-                                .insert('li', ':first-child')
-                                .html('<div class="pull-left points" width="30px">' + d.points + '</div> <span class="highlight losers">?</span>')
                             d3.select("#country-list")
                                 .insert('li', ':first-child')
                                 .html('<div class="pull-left points" width="30px">' + d.points + '</div> <span class="flag-icon flag-icon-' + lookup[d.to].iso2 + ' flag-icon-squared"></span> ' + lookup[d.to].name);
                         });
-                    //Real votes animation, TO UNCOMMENT WHEN REAL VOTES ARE IN
-
-                    /*realcircles.transition().ease(d3.easeExpInOut)
+                    
+                    //Real votes animation
+                    realcircles.transition().ease(d3.easeExpInOut)
                         .delay(function (d, i) {
                             return 600 * (10 - i);
                         })
@@ -493,9 +498,8 @@ d3.csv('data/votes_20170512.csv', function (data) {
                         .on("end", function (d, i) {
                             d3.select("#country-list-real")
                                 .insert('li', ':first-child')
-                                .html('<div class="pull-left points" width="30px">' + d.points + '</div> <span class="highlight losers">?</span>')
-                                //.html('<div class="pull-left points" width="30px">' + d.points + '</div> <span class="flag-icon flag-icon-' + lookup[d.to].iso2 + ' flag-icon-squared"></span> ' + lookup[d.to].name);
-                        });*/
+                                .html('<div class="pull-left points" width="30px">' + d.points + '</div> <span class="flag-icon flag-icon-' + lookup[d.to].iso2 + ' flag-icon-squared"></span> ' + lookup[d.to].name);
+                        });
 
                     d3.select("#map-three rect.id-" + selcountrycode).raise().transition().duration(500)
                         .style("fill", "#ffffff");
@@ -510,7 +514,7 @@ d3.csv('data/votes_20170512.csv', function (data) {
                 var mapThreeWidth = $('#map-three').width();
                 if (mapThreeWidth > 500) { mapThreeWidth = 500; }
                 var svgThree = d3.select('#map-three').append('svg').attr('width', mapThreeWidth).attr('height', mapThreeWidth + 20);
-                var svgFive = d3.select('#slopegraph').append('svg').attr('width', 300).attr('height', 700);
+                var svgFive = d3.select('#slopegraph').append('svg').attr('width', 400).attr('height', 700);
 
                 //Grid map from config.grid, Voting section
                 var cellsizeHalf = Math.floor((mapThreeWidth - 4) / 10);
@@ -564,35 +568,35 @@ d3.csv('data/votes_20170512.csv', function (data) {
                     .range([0.2, 1]);
 
                 svgFive.append('text')
-                    .attr('x', 130)
+                    .attr('x', 140)
                     .attr('y', 20)
                     .attr('text-anchor', 'middle')
                     .attr('font-size', '16px')
                     .attr('font-family', 'Roboto')
                     .text('Search');
                 svgFive.append('text')
-                    .attr('x', 230)
+                    .attr('x', 240)
                     .attr('y', 20)
                     .attr('font-size', '16px')
                     .attr('text-anchor', 'middle')
                     .style('font-family', 'Roboto')
-                    .text('Real votes');
+                    .text('Eurovision');
 
                 var countryheight = 24;
                 //Connecting lines
-                /*var connections = svgFive.selectAll('line.connection')
+                var connections = svgFive.selectAll('line.connection')
                     .data(rankingconnect)
                     .enter().append('line')
                     .attr('class', function (d) { return 'connection id-' + d.key; })
-                    .attr('x1', 140)
-                    .attr('x2', 220)
+                    .attr('x1', 150)
+                    .attr('x2', 230)
                     .attr('y1', function (d) { return countryheight*d.googlerank + 18; })
                     .attr('y2', function (d) { return countryheight*d.realrank + 18; })
                     //.style('stroke', '#eeeeee')
                     .style('stroke', function(d){
                         return '#eeeeee';
                     })
-                    .style('stroke-width', 2);*/
+                    .style('stroke-width', 2);
 
                 //Left part, search results
                 svgFive.selectAll('image')
@@ -600,7 +604,7 @@ d3.csv('data/votes_20170512.csv', function (data) {
                     .data(ranking)
                     .enter().append('image')
                     .attr("xlink:href", function (d) { return 'flags/round/svg/' + d.key + '.svg' })
-                    .attr('x', 120)
+                    .attr('x', 130)
                     .attr('y', function (d, i) { return 30 + countryheight * i; })
                     .attr('class', function (d) { return 'id-' + d.key; })
                     .attr('width', countryheight - 2)
@@ -615,34 +619,36 @@ d3.csv('data/votes_20170512.csv', function (data) {
                     .attr('class', function (d) { return 'countrylabel id-' + d.key; })
                     .attr('id', function (d) { return d.key; })
                     .style('fill', '#000037')
-                    .style('opacity', function (d) { return opacityscale(d.value); })
-                    .html(function (d, i) { return (i + 1) + '. ' + lookup[d.key].name + ': <tspan class="score id-' + d.key + '">' + d.value + '</tspan>'; });
+                    //.style('opacity', function (d) { return opacityscale(d.value); })
+                    .html(function (d, i) { return (i + 1) + '. ' + lookup[d.key].name /*+ ': <tspan class="score id-' + d.key + '">' + d.value + '</tspan>'*/; });
 
                 //Right part, real scores
                 svgFive.selectAll('image.real')
-                    .data(rankingReal)
+                    //.data(rankingReal)
+                    .data(overallrank)
                     .enter().append('image')
-                    //.attr('xlink:href', function (d) { return 'flags/round/svg/' + d.key + '.svg' })
-                    .attr('xlink:href', 'img/questionmark-circle.svg')
-                    .attr('x', 220)
+                    .attr('xlink:href', function (d) { return 'flags/round/svg/' + d.Country + '.svg' })
+                    //.attr('xlink:href', 'img/questionmark-circle.svg')
+                    .attr('x', 230)
                     .attr('y', function (d, i) { return 30 + countryheight * i; })
-                    .attr('class', function (d) { return 'id-' + d.key; })
+                    .attr('class', function (d) { return 'id-' + d.Country; })
                     .attr('width', countryheight - 2)
                     .attr('height', countryheight - 2);
-                /*var labelsReal = svgFive.selectAll('text.countrylabel.real')
-                    .data(rankingReal)
+                
+                var labelsReal = svgFive.selectAll('text.countrylabel.real')
+                    .data(overallrank)
                     .enter().append('text')
-                    .attr('x', 340)
+                    .attr('x', 380)
                     //.attr('y', function (d) { return (y(d.value) + 14); })
                     .attr('y', function(d,i) { return countryheight*i + 46; })
                     .style('font-family', 'Roboto')
                     .style('font-size', '14px')
                     .style('text-anchor', 'end')
-                    .attr('class', function (d) { return 'countrylabel id-' + d.key; })
-                    .attr('id', function (d) { return d.key; })
+                    .attr('class', function (d) { return 'countrylabel id-' + d.Country; })
+                    .attr('id', function (d) { return d.Country; })
                     .style('fill', '#000037')
                     .style('opacity', function(d) { return opacityscale(d.value); })
-                    .html(function (d, i) { return (i + 1) + '. ' + lookup[d.key].name + ': <tspan class="score id-' + d.key + '">' + d.value + '</tspan>'; });*/
+                    .html(function (d, i) { return (i + 1) + '. ' + lookup[d.Country].name /*+ ': <tspan class="score id-' + d.key + '">' + d.value + '</tspan>'*/; });
 
                 //sort config.grid first on x, than on y for the shuffling rectangle
                 var countrygrid = [];
@@ -666,8 +672,7 @@ d3.csv('data/votes_20170512.csv', function (data) {
                     return x == 0 ? a.x - b.x : x;
                 });
 
-                //UNCOMMENT AFTER THE FINAL
-                /*$('#real-search-switch-four').change(function () {
+                $('#real-search-switch-four').change(function () {
                     var checked = this.checked;
                     d3.select("#smallmultiples").transition().duration(500)
                         .style("opacity", 0)
@@ -682,7 +687,7 @@ d3.csv('data/votes_20170512.csv', function (data) {
                                 d3.select("#smallmultiples").transition().duration(500).style("opacity", 1);
                             }
                         });
-                });*/
+                });
 
                 //Small multiple maps
                 function htmlforsmallmult(sorting) {
@@ -705,7 +710,7 @@ d3.csv('data/votes_20170512.csv', function (data) {
                         var smallmultGoogle = countryrow.append('div')
                             .attr('class', 'col-md-6 col-xs-12')
                             .append('div');
-                        smallmultGoogle.append('h4').text('Searches: ' + element.value + ' points');
+                        smallmultGoogle.append('h4').text('Searches: ' + rankinggoogleLookup[element.key] + ' points');
                         smallmultGoogle.append('div')
                             .attr('class', 'smallmultiple google ' + element.key);
 
@@ -713,8 +718,8 @@ d3.csv('data/votes_20170512.csv', function (data) {
                         var smallmultReal = countryrow.append('div')
                             .attr('class', 'col-md-6 col-xs-12')
                             .append('div');
-                        //smallmultReal.append('h4').text('Eurovision votes: ' + element.value + ' points');
-                        smallmultReal.append('h4').text('Eurovision votes: available after May 13th');
+                        smallmultReal.append('h4').text('Televoting: ' + rankingrealLookup[element.key] + ' points');
+                        //smallmultReal.append('h4').text('Televoting');
                         smallmultReal.append('div')
                             .attr('class', 'smallmultiple real ' + element.key);
                     })
@@ -769,11 +774,11 @@ d3.csv('data/votes_20170512.csv', function (data) {
                                     return currenty + parseFloat(cellsizeHalf/2) - newheight/2 ; })*/
                                 .style('fill', smColorScale(fromelement.points));
                         });
-                        /*var realtoscores = getrealpoints(element.countrycode, "to");
+                        var realtoscores = getrealpoints(element.countrycode, "to");
                         realtoscores.forEach(function (fromelement) {
                             d3.select(".smallmultiple.real." + element.countrycode + " rect.id-" + fromelement.from)
                                 .style('fill', smColorScale(fromelement.points));
-                        });*/
+                        });
                     });
                 }
                 htmlforsmallmult("google");
@@ -948,7 +953,7 @@ d3.csv('data/votes_20170512.csv', function (data) {
                     }
                 });
             });
-        //});
+        });
     });
 });
 })
