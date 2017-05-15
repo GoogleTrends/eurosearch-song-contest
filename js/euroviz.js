@@ -514,7 +514,13 @@ d3.csv('data/votes_20170512.csv', function (data) {
                 var mapThreeWidth = $('#map-three').width();
                 if (mapThreeWidth > 500) { mapThreeWidth = 500; }
                 var svgThree = d3.select('#map-three').append('svg').attr('width', mapThreeWidth).attr('height', mapThreeWidth + 20);
-                var svgFive = d3.select('#slopegraph').append('svg').attr('width', 400).attr('height', 700);
+                
+                var slopegraphWidth = $('#slopegraph').width();
+                var slopegraphSvgWidth = slopegraphWidth;
+                if (slopegraphWidth > 400) {
+                    slopegraphSvgWidth = 400;
+                }
+                var svgFive = d3.select('#slopegraph').append('svg').attr('width', slopegraphSvgWidth).attr('height', 700);
 
                 //Grid map from config.grid, Voting section
                 var cellsizeHalf = Math.floor((mapThreeWidth - 4) / 10);
@@ -635,6 +641,8 @@ d3.csv('data/votes_20170512.csv', function (data) {
                     .attr('width', countryheight - 2)
                     .attr('height', countryheight - 2);
                 
+                //If screen is big enough, draw labels on the right
+                if (slopegraphWidth > 400){
                 var labelsReal = svgFive.selectAll('text.countrylabel.real')
                     .data(overallrank)
                     .enter().append('text')
@@ -649,6 +657,7 @@ d3.csv('data/votes_20170512.csv', function (data) {
                     .style('fill', '#000037')
                     .style('opacity', function(d) { return opacityscale(d.value); })
                     .html(function (d, i) { return (i + 1) + '. ' + lookup[d.Country].name /*+ ': <tspan class="score id-' + d.key + '">' + d.value + '</tspan>'*/; });
+                }
 
                 //sort config.grid first on x, than on y for the shuffling rectangle
                 var countrygrid = [];
